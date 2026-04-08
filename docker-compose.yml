@@ -1,0 +1,50 @@
+services:
+  backend:
+    build: backend
+    container_name: flask_api
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    ports:
+      - 5001:5000
+    volumes:
+      - ./backend:/app
+    networks:
+      - pwd_network
+  db:
+    image: postgres:15
+    container_name: postgres15
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
+      POSTGRES_DB : ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - pwd_network
+  pgdamin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_pwd
+    ports:
+     - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE}
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - pwd_network 
+
+volumes:
+  pgdata:
+  pgadmin_data:
+
+networks:
+  pwd_network:
+    driver: bridge
