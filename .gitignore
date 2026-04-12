@@ -1,4 +1,7 @@
 #/
 venv
+.venv
 .env
 .devcontainer
+**/__pycache__/
+pyrightconfig.json

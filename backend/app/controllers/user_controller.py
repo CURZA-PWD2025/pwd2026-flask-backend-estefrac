@@ -1,5 +1,3 @@
-from typing import Literal
-
 from sqlalchemy.exc import IntegrityError
 from app.models.user import User
 from app.models import db

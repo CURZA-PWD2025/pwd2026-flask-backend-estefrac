@@ -21,17 +21,13 @@ def create_app():
     app.register_blueprint(roles)
     app.register_blueprint(auth_bp)
     
-    @app.route('/')
-    @app.route('/<nombre>')    
-    def home(nombre = None):
-        if (nombre == None):
-            return f' <h1>Hola  desde programacion web dinamica 2026<h1>'
-        return f'Hola {nombre} te saludamos desde programacion web dinamica 2026'
-
-    @app.route('/saludo')
-    def saludo():
-        return f'Hola desde programacion web dinamica 2026 saludo'
     db.init_app(app)
+
+    from app.models.categoria import Categoria
+    from app.models.producto import Producto
+    from app.models.proveedor import Proveedor
+    from app.models.movimiento_stock import MovimientoStock
+
     migrate.init_app(app=app, db=db)
     jwt.init_app(app)
     return app
