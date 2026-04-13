@@ -5,6 +5,7 @@ from app.config import config
 from app.routes.user_routes import users
 from app.routes.rol_routes import roles
 from app.routes.auth_routes import auth_bp
+from app.routes.categoria_routes import categorias
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
@@ -20,10 +21,10 @@ def create_app():
     app.register_blueprint(users)
     app.register_blueprint(roles)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(categorias)
     
     db.init_app(app)
 
-    from app.models.categoria import Categoria
     from app.models.producto import Producto
     from app.models.proveedor import Proveedor
     from app.models.movimiento_stock import MovimientoStock

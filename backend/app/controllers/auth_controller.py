@@ -22,7 +22,7 @@ class AuthController:
             
         if error is None:
             try:
-                rol_user = db.session.execute(db.select(Rol).filter_by(nombre='user')).scalar_one_or_none()
+                rol_user = db.session.execute(db.select(Rol).filter_by(nombre='operador')).scalar_one_or_none()
                 if rol_user and nombre and password and email is not None:
                     user = User(nombre=nombre, email=email, rol_id=rol_user.id, password=password)    
                     user.generate_password(password)
@@ -62,5 +62,3 @@ class AuthController:
         if user:
             return jsonify({'id': user.id, 'nombre': user.nombre, 'email': user.email, 'rol': user.rol.nombre if user.rol else None}), 200
         return jsonify({'message': "Usuario no encontrado"}), 404
-
-
