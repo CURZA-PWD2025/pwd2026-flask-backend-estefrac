@@ -63,7 +63,7 @@ class CategoriaController (Controller):
             else:
                 error = 'categoria no encontrada'
 
-        return jsonify({'message':error}), 404
+        return jsonify({'message':error}), 422
 
     @staticmethod
     def destroy(id) -> tuple[Response, int]:
