@@ -1,5 +1,3 @@
-from typing import Literal
-
 from sqlalchemy.exc import IntegrityError
 from app.models.user import User
 from app.models import db
@@ -25,12 +23,12 @@ class UserController (Controller):
     
     @staticmethod
     def create(request) -> tuple[Response, int]:
-        nombre:str = request['nombre']
-        email:str = request['email']
+        nombre = request.get('nombre')
+        email = request.get('email')
         error :str | None = None
-        if nombre is None:
+        if not isinstance(nombre, str):
             error = 'El nombre es requerido'
-        if email is None:
+        if not isinstance(email, str):
             error = 'El email es requerido'
             
         if error is None:
@@ -47,12 +45,12 @@ class UserController (Controller):
         
     @staticmethod
     def update(request, id)->tuple[Response, int]:
-        nombre:str = request['nombre']
-        email:str = request['email']
+        nombre = request.get('nombre')
+        email = request.get('email')
         error :str | None = None
-        if nombre is None:
+        if not isinstance(nombre, str):
             error = 'El nombre es requerido'
-        if email is None:
+        if not isinstance(email, str):
             error = 'El email es requerido'
             
         if error is None:
