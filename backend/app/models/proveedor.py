@@ -7,7 +7,7 @@ class Proveedor(BaseModel):
     contacto = db.Column(db.String(100), nullable=True)
     telefono = db.Column(db.String(30), nullable=True)
     email = db.Column(db.String(120), nullable=True)
-    productos = db.relationship('Producto')
+    productos = db.relationship('Producto', back_populates='proveedor')
 
     def __init__(self, nombre, contacto=None, telefono=None, email=None) -> None:
         self.nombre = nombre
