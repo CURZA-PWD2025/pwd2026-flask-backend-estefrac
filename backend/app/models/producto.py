@@ -13,7 +13,7 @@ class Producto(BaseModel):
     proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedores.id'), nullable=True)
     categoria = db.relationship('Categoria', back_populates='productos')
     proveedor = db.relationship('Proveedor', back_populates='productos')
-    movimientos_stock = db.relationship('MovimientoStock')
+    movimientos_stock = db.relationship('MovimientoStock', back_populates='producto')
 
     def __init__(self, nombre, precio_costo, precio_venta, categoria_id, descripcion=None, stock_actual:int=0, stock_minimo:int=0, proveedor_id=None) -> None:
         self.nombre = nombre

@@ -11,6 +11,7 @@ class User(BaseModel):
     password = db.Column(db.String(255) )
     rol = db.relationship('Rol', back_populates='users')
     activo = db.Column(db.String(1), default = 'S')
+    movimientos_stock = db.relationship('MovimientoStock', back_populates='user')
     
     def __init__(self, nombre:str, email:str, password:str, rol_id:int) -> None:
       self.nombre = nombre

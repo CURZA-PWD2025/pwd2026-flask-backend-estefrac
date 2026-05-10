@@ -8,6 +8,8 @@ class MovimientoStock(BaseModel):
     motivo = db.Column(db.String(200), nullable=True)
     producto_id = db.Column(db.Integer, db.ForeignKey('productos.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    producto = db.relationship('Producto', back_populates='movimientos_stock')
+    user = db.relationship('User', back_populates='movimientos_stock')
 
     def __init__(self, tipo, cantidad, producto_id, user_id, motivo=None) -> None:
         self.tipo = tipo
